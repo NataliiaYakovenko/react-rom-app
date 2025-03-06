@@ -22,7 +22,7 @@ class Aloha extends React.Component{
         //3 в залежності від значення стейту, вирахувати, що за текс ви показуєте (за прикладом лампочки)
         const greetChange = this.state.isGreeting ? 'Hello' : "Bye"
 
-        return <h1 onClick={()=>{this.changeGreetHandler()}}>{greetChange} {this.props.name}</h1>
+        return <h1 onClick={()=>{this.changeGreetHandler()}}>{greetChange} {this.props.firstName} {this.props.lastName}</h1>
 
         //не забудьте підписати h1 на обробник кліку розроблений у пункті 2
      }
