@@ -7,22 +7,27 @@ class AlohaDashboard extends React.Component {
     this.state = {
       usersArray: [
         {
+          id: 1,
           firstName: "Nataliia",
           lastName: "Yakovenko",
         },
         {
+          id: 2,
           firstName: "Roland",
           lastName: "Symonian",
         },
         {
+          id: 3,
           firstName: "David",
           lastName: "Brokovich",
         },
         {
+          id: 4,
           firstName: "Taylor",
           lastName: "Covalskiy",
         },
         {
+          id: 5,
           firstName: "Jon",
           lastName: "Travolte",
         },
@@ -33,7 +38,7 @@ class AlohaDashboard extends React.Component {
   userToAloha() {
     const { usersArray } = this.state;
     return usersArray.map((user) => (
-      <Aloha firstName={user.firstName} lastName={user.lastName} />
+      <Aloha key={user.id} firstName={user.firstName} lastName={user.lastName} />
     ));
   }
 
@@ -42,14 +47,20 @@ class AlohaDashboard extends React.Component {
     const newArray = [...usersArray];
     newArray.sort((a, b) => (a.firstName > b.firstName ? 1 : -1));
     this.setState({
-        usersArray:newArray
-    })
+      usersArray: newArray,
+    });
   }
 
   render() {
     return (
       <>
-        <button onClick={() => {this.sortUsers()}} >Sort</button>
+        <button
+          onClick={() => {
+            this.sortUsers();
+          }}
+        >
+          Sort
+        </button>
         {this.userToAloha()}
       </>
     );
