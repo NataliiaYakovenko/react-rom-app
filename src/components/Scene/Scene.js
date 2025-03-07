@@ -2,13 +2,15 @@
 
 import React from "react";
 import Toggler from "./Toggler";
+import Indicator from "./Indicator";
 import './Scene.css'
 
 class Scene extends React.Component {
   constructor(props){
     super(props);
     this.state={
-        isLight: true
+        isLight: true,
+       
     }
   }
 
@@ -20,10 +22,13 @@ class Scene extends React.Component {
 
   render() {
     const{isLight}=this.state
-    return (
-    <div className={isLight ? "scene-on" : "scene-off"}>
+    return (<>
+     <div className={isLight ? "scene-on" : "scene-off"}>
     <Toggler changeParentState={this.toggleScene} buttonText={isLight ? 'Off' : 'On'}/>
-    </div>)
+    <Indicator text={isLight ? "light is on": "light is off"}/>
+    </div>
+    </>
+    )
   }
 }
 
