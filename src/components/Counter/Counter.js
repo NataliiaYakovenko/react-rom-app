@@ -22,6 +22,7 @@ start(){
 }
 
   componentDidMount(){
+    this.start()
     console.log('componentDidMount');
   }
   componentDidUpdate(){
@@ -40,7 +41,7 @@ start(){
        return(
         <>
         <h1>{this.state.count}</h1>
-        <button onClick={()=>{this.start()}}>Start</button>
+        
         </>
        )
     }
