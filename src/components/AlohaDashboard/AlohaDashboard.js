@@ -1,5 +1,5 @@
 import React from "react";
-import Aloha from "../Aloha";
+import Aloha from "./Aloha";
 
 class AlohaDashboard extends React.Component {
   constructor(props) {
