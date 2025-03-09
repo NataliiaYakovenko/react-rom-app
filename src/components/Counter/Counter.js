@@ -1,4 +1,6 @@
 import React from "react";
+import CounterParent from "./CounterParent";
+
 
 class Counter extends React.Component{
     constructor(props){
@@ -6,19 +8,21 @@ class Counter extends React.Component{
         this.state ={
             count: 0,
         }
+        this.intervalId = null
        
 
        console.log('constructor');
     }
 
 start(){
-    setInterval(()=>{
+    this.intervalId = setInterval(()=>{
         const{count}=this.state
         this.setState({
              count: count +1
         })
 
     },1000)
+
 }
 
   componentDidMount(){
@@ -33,6 +37,7 @@ start(){
     return true
   }
   componentWillUnmount(){
+    clearInterval(this.intervalId)
     console.log('componentWillUnmount');
   }
 
