@@ -34,6 +34,13 @@ body {
     border-radius: 50%;
     margin-bottom: 10px;
   }
+
+  input{
+    width: 250px;
+    padding: 10px 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
   
   /* Кнопка */
   button {
