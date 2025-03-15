@@ -8,11 +8,12 @@ class UserList extends React.Component {
 
     this.state = {
       users: [],
+      filtredUsers: [],
     };
   }
 
   componentDidMount() {
-    getUsers().then((data) => {
+    getUsers(100).then((data) => {
       const { results } = data;
 
       this.setState({
@@ -22,25 +23,50 @@ class UserList extends React.Component {
   }
 
   renderUsers = () => {
-    const { users } = this.state;
-    return users.map((user) => (
-      <UserCard  user={user} key={user.login.uuid}/>
-    ));
+    const { users, filtredUsers } = this.state;
+    return filtredUsers.length > 0
+      ? filtredUsers.map((user) => (
+          <UserCard user={user} key={user.login.uuid} />
+        ))
+      : users.map((user) => <UserCard user={user} key={user.login.uuid} />);
   };
 
   clickHandler = () => {
-    getUsers().then(data =>{
-      const{results}=data
-      
-      const tempArray = this.state.users
-      tempArray.push(results[0])
+    getUsers().then((data) => {
+      const { results } = data;
+
+      const tempArray = this.state.users;
+      tempArray.push(results[0]);
 
       this.setState({
-        users:tempArray
-      })
-    })
-  }
+        users: tempArray,
+      });
+    });
+  };
 
+  handleSearch = (event) => {
+    const {
+      target: { value: searchValue },
+    } = event;
+    const { users } = this.state;
+
+    //1 якщо в інпуту нічого немає, тоді чистемо масив відфільтрованих юзерів
+    if (searchValue === '') {
+      this.setState({
+        filtredUsers: [],
+      });
+      return;
+    }
+    //2 фільтруємо по прізвищу
+    const filtredUsers = users.filter(user => user.name.last.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1);
+   
+
+    //3 кладемо в стейт масив відфільтрованих users
+    this.setState({
+      filtredUsers: filtredUsers,
+    });
+   
+  };
 
   render() {
     const { users } = this.state;
@@ -48,9 +74,18 @@ class UserList extends React.Component {
     return (
       <>
         <h1 className="header-text">Users list</h1>
-        <button onClick={() => this.clickHandler()}>Add user</button>
-        <section className="card-container">{users.length ? this.renderUsers() : null}</section>
 
+     
+        <input
+          type="text"
+          placeholder="Search by lastname"
+          onChange={this.handleSearch}
+        />
+
+        <button onClick={() => this.clickHandler()}>Add user</button>
+        <section className="card-container">
+          {users.length ? this.renderUsers() : <h2>Users loading...</h2>}
+        </section>
       </>
     );
   }
