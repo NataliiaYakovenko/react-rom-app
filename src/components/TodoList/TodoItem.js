@@ -16,7 +16,7 @@
 import React from "react";
 
 function TodoItem(props) {
-  console.log(props);
+  //console.log(props);
   const { id, text, onDelete } = props;
 
   return (
