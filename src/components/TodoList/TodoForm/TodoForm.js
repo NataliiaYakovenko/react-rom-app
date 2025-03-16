@@ -14,6 +14,7 @@ TodoForm - дочірня компонента
 
 import React from "react";
 import styles from "./TodoForm.module.css";
+import cx from 'classnames'
 
 class TodoForm extends React.Component {
   constructor(props) {
@@ -83,13 +84,13 @@ class TodoForm extends React.Component {
 export default TodoForm;
 
 
-function cx(objectClassNames){
- const cort = Object.entries(objectClassNames)
- const filteredArray = cort.filter((className,condition)=>condition)
- const mapArray = filteredArray.map(([className,condition])=>className)
- return mapArray.join(' ')
+// function cx(objectClassNames){
+//  const cort = Object.entries(objectClassNames)
+//  const filteredArray = cort.filter((className,condition)=>condition)
+//  const mapArray = filteredArray.map(([className,condition])=>className)
+//  return mapArray.join(' ')
 
-}
+// }
 
 // const objectClassNames = {
 //   className1: true,
