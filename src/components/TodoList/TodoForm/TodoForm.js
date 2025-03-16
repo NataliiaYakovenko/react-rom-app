@@ -14,6 +14,7 @@ TodoForm - дочірня компонента
 */
 
 import React from "react";
+import styles from './TodoForm.module.css'
 
 class TodoForm extends React.Component {
   constructor(props) {
@@ -46,9 +47,10 @@ class TodoForm extends React.Component {
   }
 
   render() {
+
     const { taskText } = this.state;
     return (
-      <form onSubmit={this.submitHandler}>
+      <form onSubmit={this.submitHandler} className={styles.container}>
         {/*  3. потрібно вказати, що value input контролюється state (це робиться атрибутом value) */}
         <input
           type="text"

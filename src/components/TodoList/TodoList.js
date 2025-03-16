@@ -1,6 +1,9 @@
 import React from "react";
 import TodoItem from "./TodoItem";
-import TodoForm from "./TodoForm";
+import TodoForm from './TodoForm/TodoForm'
+import styles from './TodoList.module.css'
+
+
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -58,7 +61,7 @@ class TodoList extends React.Component {
       <>
         <h2>Todo List</h2>
         <TodoForm onAdd={this.formHandler} />
-        <ul>
+        <ul className={styles.container}>
           {arrayTodoList.map((task) => (
             <TodoItem
               key={task.id}
