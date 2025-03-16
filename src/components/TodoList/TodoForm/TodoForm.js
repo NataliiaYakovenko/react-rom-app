@@ -58,10 +58,16 @@ class TodoForm extends React.Component {
 
   render() {
     const { taskText, isInputValid } = this.state;
+
+    const className = cx({
+    [styles.input]: true,
+    [styles.inValidInput]: !isInputValid,
+    })
+
     return (
       <form onSubmit={this.submitHandler} className={styles.container}>
         {/*  3. потрібно вказати, що value input контролюється state (це робиться атрибутом value) */}
-        <input className={isInputValid === true ? '' : styles.inValidInput }
+        <input className={className}
           type="text"
           placeholder="Add your task"
           value={taskText}
@@ -75,3 +81,26 @@ class TodoForm extends React.Component {
 }
 
 export default TodoForm;
+
+
+function cx(objectClassNames){
+ const cort = Object.entries(objectClassNames)
+ const filteredArray = cort.filter((className,condition)=>condition)
+ const mapArray = filteredArray.map(([className,condition])=>className)
+ return mapArray.join(' ')
+
+}
+
+// const objectClassNames = {
+//   className1: true,
+//   className2: true,
+//   className2: false
+
+//  [ [className1, true],[className2, true],[className2, false] ]
+//   =>
+//   [ [className1, true],[className2, true] ]
+//   =>
+//   [ className1,className2 ]
+//    =>
+//   "className1 className2 "
+// }
