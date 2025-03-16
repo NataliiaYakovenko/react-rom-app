@@ -2,3 +2,14 @@
     background-color: blueviolet;
     border: 4px dashed red;
 }
+
+.inValidInput{
+    border: 6px solid rgb(33, 159, 18);
+    background-color: yellow;
+
+}
+
+.input{
+    height: 40px;
+    background-color: cadetblue;
+}

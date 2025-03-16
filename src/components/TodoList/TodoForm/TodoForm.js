@@ -1,4 +1,3 @@
-
 /*
 Todolist - компонента, в якій відбувається управління списком задач і рендериться 
 сам список задач 
@@ -14,7 +13,7 @@ TodoForm - дочірня компонента
 */
 
 import React from "react";
-import styles from './TodoForm.module.css'
+import styles from "./TodoForm.module.css";
 
 class TodoForm extends React.Component {
   constructor(props) {
@@ -23,40 +22,50 @@ class TodoForm extends React.Component {
     this.state = {
       //1. Створити відповідне поле у state, яке буде контролювати значення input
       taskText: "",
+      isInputValid: true,
     };
   }
 
   //2. Зробити обробник зміни input onChange, який буде змінювати state
   /*Шаблон обробника інпута (можна використовувати до кожного інпута)*/
   textHandler = ({ target: { value, name } }) => {
+    if (value.includes("*") === true) {
+      this.setState({
+        isInputValid: false,
+      });
+    } else {
+      this.setState({
+        [name]: value,
+        isInputValid: true,
+      })
+    }
+  
+  }
+  submitHandler = (event) => {
+    const {
+      props: { onAdd },
+      state: { taskText },
+    } = this;
+    event.preventDefault();
+
+    onAdd(taskText);
+
+    //очищаємо інпут після додавання тексту
     this.setState({
-      [name]: value,
+      taskText: "",
     });
-  };
-
-  submitHandler=(event)=>{
-    const {props:{onAdd}, state: {taskText}}=this
-     event.preventDefault()
-
-     onAdd(taskText)
-
-     //очищаємо інпут після додавання тексту
-     this.setState({
-      taskText: ''
-     })
   }
 
   render() {
-
-    const { taskText } = this.state;
+    const { taskText, isInputValid } = this.state;
     return (
       <form onSubmit={this.submitHandler} className={styles.container}>
         {/*  3. потрібно вказати, що value input контролюється state (це робиться атрибутом value) */}
-        <input
+        <input className={isInputValid === true ? '' : styles.inValidInput }
           type="text"
           placeholder="Add your task"
           value={taskText}
-          name='taskText'
+          name="taskText"
           onChange={this.textHandler}
         />
         <button type="submit">Add task</button>
