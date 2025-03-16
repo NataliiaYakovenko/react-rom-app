@@ -39,17 +39,16 @@ class TodoList extends React.Component {
     this.setState({ arrayTodoList: filtredArray });
   };
 
-  addTask = (text) => {
+  formHandler = (text) => {
     const { arrayTodoList } = this.state;
-    const lastTask = arrayTodoList[arrayTodoList.length - 1]; //отримую останній елемент
-    let newId = 0;
-    if (lastTask !== undefined) {
-      newId = lastTask.id + 1;
-    }
-    arrayTodoList.push({ id: newId, text: text });
+    const newObject = {
+      id: arrayTodoList.length +1,
+      text: text,
+    };
+    const newArray = [...arrayTodoList, newObject];
 
     this.setState({
-      arrayTodoList: arrayTodoList,
+      arrayTodoList: newArray,
     });
   };
 
@@ -58,7 +57,7 @@ class TodoList extends React.Component {
     return (
       <>
         <h2>Todo List</h2>
-        <TodoForm onAdd={this.addTask} />
+        <TodoForm onAdd={this.formHandler} />
         <ul>
           {arrayTodoList.map((task) => (
             <TodoItem
@@ -75,17 +74,3 @@ class TodoList extends React.Component {
 }
 
 export default TodoList;
-
-/*
-Todolist - компонента, в якій відбувається управління списком задач і рендериться 
-сам список задач 
-
-Зробити компоненту TodoForm, яка буде представляти собою форму
-- буде 1 input текст task
-- буде кнопка, яка буде додавати task до списку у батьківській компоненті TodoList
-
-TodoList - батьківська компонента
-
-TodoForm - дочірня компонента
-
-*/
