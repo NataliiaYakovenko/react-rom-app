@@ -1,6 +1,7 @@
 import React from "react";
 import { getUsers } from "../../api";
 import UserCard from "./UserCard";
+import HashLoader from "react-spinners/HashLoader";
 
 class UserList extends React.Component {
   constructor(props) {
@@ -9,19 +10,34 @@ class UserList extends React.Component {
     this.state = {
       users: [],
       filtredUsers: [],
-      userCount: 100
+      userCount: 100,
+      isLoading: true,
+      isError: false,
     };
   }
 
   componentDidMount() {
-    const{userCount}=this.state
-    getUsers(userCount).then((data) => {
-      const { results } = data;
+    const { userCount } = this.state;
+    getUsers(userCount)
+      .then((data) => {
+        const { results } = data;
 
-      this.setState({
-        users: results,
-      });
-    });
+        this.setState({
+          users: results,
+        
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          isError: error,
+       
+        });
+      })
+      .finally(()=>{
+        this.setState({
+          isLoading: false
+        });
+      })
   }
 
   renderUsers = () => {
@@ -72,33 +88,47 @@ class UserList extends React.Component {
   };
 
   handleSrtUserCount = (event) => {
-    const{target:{value}}=event
+    const {
+      target: { value },
+    } = event;
 
     this.setState({
-      userCount: value
-    })
+      userCount: value,
+    });
   };
 
   handleLoadUsersClock = () => {
-    const {userCount}= this.state
+    const { userCount } = this.state;
     getUsers(userCount).then((data) => {
       const { results } = data;
 
       const tempArray = this.state.users;
-      results.forEach((user)=>{
-        tempArray.push(user)
-      })
+      results.forEach((user) => {
+        tempArray.push(user);
+      });
 
       this.setState({
         users: tempArray,
       });
-    });
+    })
+    .catch((error) => {
+      this.setState({
+        isError: error,
+     
+      });
+    })
+    .finally(()=>{
+      this.setState({
+        isLoading: false
+      });
+    })
   };
 
 
 
   render() {
-    const { users } = this.state;
+    const { users, isLoading,isError } = this.state;
+    console.dir(isError);
 
     return (
       <>
@@ -110,17 +140,26 @@ class UserList extends React.Component {
           max={500}
           onChange={this.handleSrtUserCount}
         ></input>
+
         <button onClick={this.handleLoadUsersClock}>Load users</button>
         <br />
+
+
         <input
           type="text"
           placeholder="Search by lastname"
           onChange={this.handleSearch}
         />
         <br />
+
+
         <button onClick={() => this.clickHandler()}>Add user</button>
+
+         {isLoading && <HashLoader   color="blue" size={300}  cssOverride={{display: 'block', margin: '0 auto'}}>Users Loading ...</HashLoader>}
+         {isError && <h2>{isError.message}</h2>}
+
         <section className="card-container">
-          {users.length ? this.renderUsers() : <h2>Users loading...</h2>}
+          {users.length ? this.renderUsers() : null}
         </section>
       </>
     );
