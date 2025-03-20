@@ -13,31 +13,21 @@ class UserList extends React.Component {
       userCount: 100,
       isLoading: true,
       isError: false,
+      page: 1,
     };
   }
 
   componentDidMount() {
-    const { userCount } = this.state;
-    getUsers(userCount)
-      .then((data) => {
-        const { results } = data;
+    const { page } = this.state;
+    this.loadPage(page);
+  }
 
-        this.setState({
-          users: results,
-        
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          isError: error,
-       
-        });
-      })
-      .finally(()=>{
-        this.setState({
-          isLoading: false
-        });
-      })
+  componentDidUpdate(prevProps, prevState) {
+    const { page } = this.state;
+
+    if (prevState.page !== page) {
+      this.loadPage(page);
+    }
   }
 
   renderUsers = () => {
@@ -97,37 +87,77 @@ class UserList extends React.Component {
     });
   };
 
-  handleLoadUsersClock = () => {
+  handleLoadUsersClick = (page) => {
     const { userCount } = this.state;
-    getUsers(userCount).then((data) => {
-      const { results } = data;
 
-      const tempArray = this.state.users;
-      results.forEach((user) => {
-        tempArray.push(user);
-      });
+    getUsers(userCount, page)
+      .then((data) => {
+        const { results } = data;
 
-      this.setState({
-        users: tempArray,
+        const tempArray = this.state.users;
+        results.forEach((user) => {
+          tempArray.push(user);
+        });
+
+        this.setState({
+          users: tempArray,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          isError: error,
+        });
+      })
+      .finally(() => {
+        this.setState({
+          isLoading: false,
+        });
       });
-    })
-    .catch((error) => {
-      this.setState({
-        isError: error,
-     
-      });
-    })
-    .finally(()=>{
-      this.setState({
-        isLoading: false
-      });
-    })
   };
 
+  loadPage = (page) => {
+    const { userCount } = this.state;
 
+    getUsers(userCount, page)
+      .then((data) => {
+        const { results } = data;
+
+        this.setState({
+          users: results,
+        });
+      })
+
+      .catch((error) => {
+        this.setState({
+          isError: error,
+        });
+      })
+      .finally(() => {
+        this.setState({
+          isLoading: false,
+        });
+      });
+  };
+
+  prevBtnHandler = () => {
+    const { page } = this.state;
+
+    if (page > 1) {
+      this.setState({
+        page: page - 1,
+      });
+    }
+  };
+
+  nextBtnHandler = () => {
+    const { page } = this.state;
+    this.setState({
+      page: page + 1,
+    });
+  };
 
   render() {
-    const { users, isLoading,isError } = this.state;
+    const { users, isLoading, isError } = this.state;
     console.dir(isError);
 
     return (
@@ -141,9 +171,8 @@ class UserList extends React.Component {
           onChange={this.handleSrtUserCount}
         ></input>
 
-        <button onClick={this.handleLoadUsersClock}>Load users</button>
+        <button onClick={this.handleLoadUsersClick}>Load users</button>
         <br />
-
 
         <input
           type="text"
@@ -152,11 +181,23 @@ class UserList extends React.Component {
         />
         <br />
 
-
         <button onClick={() => this.clickHandler()}>Add user</button>
 
-         {isLoading && <HashLoader   color="blue" size={300}  cssOverride={{display: 'block', margin: '0 auto'}}>Users Loading ...</HashLoader>}
-         {isError && <h2>{isError.message}</h2>}
+        {isLoading && (
+          <HashLoader
+            color="blue"
+            size={300}
+            cssOverride={{ display: "block", margin: "0 auto" }}
+          >
+            Users Loading ...
+          </HashLoader>
+        )}
+        {isError && <h2>{isError.message}</h2>}
+
+        <button onClick={this.prevBtnHandler} style={{ margin: "5px" }}>
+          Previous page
+        </button>
+        <button onClick={this.nextBtnHandler}>Next page</button>
 
         <section className="card-container">
           {users.length ? this.renderUsers() : null}
