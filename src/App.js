@@ -1,10 +1,12 @@
 import React from "react";
-import UserList from "./components/UserList/UserList";
 
 function App() {
   return (
-   <UserList/>
+    <>
+    <button onClick={() => {window.close()}}> Close page</button>
+    <button onClick={()=>{ window.open('https://unsplash.com/s/photos/dogs')}}>Open page</button>
+    </>
   );
 }
- 
+
 export default App;

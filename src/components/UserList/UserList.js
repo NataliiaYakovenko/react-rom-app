@@ -157,7 +157,7 @@ class UserList extends React.Component {
   };
 
   render() {
-    const { users, isLoading, isError } = this.state;
+    const { users, isLoading, isError,page } = this.state;
     console.dir(isError);
 
     return (
@@ -194,7 +194,7 @@ class UserList extends React.Component {
         )}
         {isError && <h2>{isError.message}</h2>}
 
-        <button onClick={this.prevBtnHandler} style={{ margin: "5px" }}>
+        <button disabled = {page ===1 } onClick={this.prevBtnHandler} style={{ margin: "5px" }} >
           Previous page
         </button>
         <button onClick={this.nextBtnHandler}>Next page</button>
