@@ -3,8 +3,10 @@ import React from "react";
 function App() {
   return (
     <>
-    <button onClick={() => {window.close()}}> Close page</button>
-    <button onClick={()=>{ window.open('https://unsplash.com/s/photos/dogs')}}>Open page</button>
+    <button onClick={() => {window.location.assign('https://unsplash.com/s/photos/dogs')}}> Assign</button>
+    <button onClick={() => {window.location.reload()}}> Relosd</button>
+    <button onClick={() => {window.location.replace('https://pixabay.com/images/search/cat/')}}> Replace</button>
+
     </>
   );
 }
