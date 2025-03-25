@@ -15,7 +15,6 @@ function App() {
         draggable
         pauseOnHover
         theme="colored"
-     
       />
 
       <button
@@ -58,6 +57,17 @@ function App() {
         }}
       >
         Click to copy text
+      </button>
+
+      <button
+        onClick={() => {
+          window.navigator.clipboard.readText()
+          .then((text) => {
+                 console.log(text)
+          });
+        }}
+      >
+        Read text from buffer
       </button>
     </>
   );
