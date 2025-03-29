@@ -1,5 +1,11 @@
 import React, {Component} from "react";
 
+/*
+1. Компонента йде за данними
+2. Компонента отримує данні і кладе їх в state
+3. Компонента ділиться з даними з кимось іншим, хто знає, як треба відобразити ці данні
+*/
+
 class DataProvider extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +22,7 @@ class DataProvider extends Component {
   };
 
   load = () => {
-    const {url}= this.props
-    fetch (url)
-      .then(response => response.json())
+this.props.loadData()
       .then((data) => {
         this.setState({
           data: data,
@@ -37,23 +41,7 @@ class DataProvider extends Component {
   };
 
   render() {
-    const { data, isLoading, isError } = this.state;
-    return (
-      <div>
-        {isLoading && <div>Loading...</div>}
-        {isError && <div>Error...{isError.message}</div>}
-
-        <ul>
-          {data.map((data) => {
-            return (
-              <li>
-                Brand: {data.brand}--- Model: {data.model}--- Price: {data.price}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
+    return this.props.renderData(this.state)
   }
 }
 
