@@ -1,6 +1,4 @@
 import React from "react";
-import PhonesLoader from "./components/PhonesLoader/PhonesLoader";
-import TVLoader from "./components/TVLoader/TVLoader";
 import DataProvider from "./components/DataProvider/DataProvider";
 
 function App() {
@@ -27,6 +25,33 @@ function App() {
                   );
                 })}
               </ul>
+            </div>
+          );
+        }}
+        
+         </DataProvider>/
+
+         <DataProvider loadData={() => {
+          return fetch("./tv.json").then((response) => response.json());
+        }}>
+
+        {(state) => {
+          const { data, isLoading, isError } = state;
+          return (
+            <div>
+              {isLoading && <div>Loading...</div>}
+              {isError && <div>Error...{isError.message}</div>}
+
+              <ol>
+                {data.map((data,index) => {
+                  return (
+                    <li key={index}>
+                      Brand: {data.brand}--- Model: {data.model}--- Price:{" "}
+                      {data.price}
+                    </li>
+                  );
+                })}
+              </ol>
             </div>
           );
         }}
