@@ -1,23 +1,23 @@
 [
     {
-      "brand": "Samsung",
-      "model": "S10",
-      "price": "$100"
+      "brand": "Sony",
+      "model": "555",
+      "price": "$1000"
     },
     {
-      "brand": "Nokia",
-      "model": "5540",
-      "price": "$20"
+      "brand": "Kivi",
+      "model": "9898",
+      "price": "$400"
     },
     {
-      "brand": "Iphone",
-      "model": "15 Plus",
-      "price": "$2600"
+      "brand": "LG",
+      "model": "2222",
+      "price": "$1200"
     },
     {
-      "brand": "Redmi",
-      "model": "Pro8",
-      "price": "$200"
+      "brand": "Philips",
+      "model": "7688",
+      "price": "$2000"
     }
   ]
   
