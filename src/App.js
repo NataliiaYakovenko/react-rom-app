@@ -6,8 +6,40 @@ import DataProvider from "./components/DataProvider/DataProvider";
 function App() {
   return (
     <>
-      <DataProvider
-        loadData={() => {
+      <DataProvider loadData={() => {
+          return fetch("./phones.json").then((response) => response.json());
+        }}>
+
+        {(state) => {
+          const { data, isLoading, isError } = state;
+          return (
+            <div>
+              {isLoading && <div>Loading...</div>}
+              {isError && <div>Error...{isError.message}</div>}
+
+              <ul>
+                {data.map((data,index) => {
+                  return (
+                    <li key={index}>
+                      Brand: {data.brand}--- Model: {data.model}--- Price:{" "}
+                      {data.price}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        }}
+        
+         </DataProvider>/
+    </>
+  );
+}
+
+export default App;
+
+/*
+ loadData={() => {
           return fetch("./phones.json").then((response) => response.json());
         }}
 
@@ -31,9 +63,5 @@ function App() {
             </div>
           );
         }}
-      />
-    </>
-  );
-}
 
-export default App;
+*/

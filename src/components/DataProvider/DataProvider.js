@@ -41,7 +41,7 @@ this.props.loadData()
   };
 
   render() {
-    return this.props.renderData(this.state)
+    return this.props.children(this.state)
   }
 }
 
