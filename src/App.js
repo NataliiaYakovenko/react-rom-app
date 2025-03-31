@@ -1,92 +1,25 @@
-import React from "react";
-import DataProvider from "./components/DataProvider/DataProvider";
+import React, { Component } from 'react';
+import Tree from './components/Tree/Tree';
 
-function App() {
-  return (
-    <>
-      <DataProvider loadData={() => {
-          return fetch("./phones.json").then((response) => response.json());
-        }}>
+class App extends React.Component {
+  constructor(props){
+    super(props)
 
-        {(state) => {
-          const { data, isLoading, isError } = state;
-          return (
-            <div>
-              {isLoading && <div>Loading...</div>}
-              {isError && <div>Error...{isError.message}</div>}
+    this.state={
+         user:{
+          firstName: 'Nataliia',
+          lastName: 'Yakovenko',
+          email: 'yakovenkonatali999@gmail.com',
+          avatar: 'https://c8.alamy.com/comp/2PYYR60/business-woman-avatar-illustration-simple-cartoon-user-portrait-user-profile-icon-business-leader-vector-illustration-2PYYR60.jpg'
+         }
+    }
+  }
 
-              <ul>
-                {data.map((data,index) => {
-                  return (
-                    <li key={index}>
-                      Brand: {data.brand}--- Model: {data.model}--- Price:{" "}
-                      {data.price}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          );
-        }}
-        
-         </DataProvider>/
-
-         <DataProvider loadData={() => {
-          return fetch("./tv.json").then((response) => response.json());
-        }}>
-
-        {(state) => {
-          const { data, isLoading, isError } = state;
-          return (
-            <div>
-              {isLoading && <div>Loading...</div>}
-              {isError && <div>Error...{isError.message}</div>}
-
-              <ol>
-                {data.map((data,index) => {
-                  return (
-                    <li key={index}>
-                      Brand: {data.brand}--- Model: {data.model}--- Price:{" "}
-                      {data.price}
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
-          );
-        }}
-        
-         </DataProvider>/
-    </>
-  );
+  render() {
+    return (
+      <Tree user={this.state.user} />
+    );
+  }
 }
 
 export default App;
-
-/*
- loadData={() => {
-          return fetch("./phones.json").then((response) => response.json());
-        }}
-
-        renderData={(state) => {
-          const { data, isLoading, isError } = state;
-          return (
-            <div>
-              {isLoading && <div>Loading...</div>}
-              {isError && <div>Error...{isError.message}</div>}
-
-              <ul>
-                {data.map((data) => {
-                  return (
-                    <li>
-                      Brand: {data.brand}--- Model: {data.model}--- Price:{" "}
-                      {data.price}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          );
-        }}
-
-*/
