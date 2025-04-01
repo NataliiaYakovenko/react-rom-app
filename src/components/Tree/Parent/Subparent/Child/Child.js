@@ -5,7 +5,7 @@ const Child = (props) => {
   return (
     <div style={{ border: "2px solid black", padding: "25px", textAlign:'center'}}>
       Child
-      <InnerChild user={props.user}/>
+      <InnerChild />
     </div>
   );
 }

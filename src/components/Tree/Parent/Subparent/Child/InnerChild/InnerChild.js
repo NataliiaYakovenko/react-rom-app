@@ -1,21 +1,28 @@
 import React from "react";
+import { UserContext } from "../../../../../context/UserContext";
 
 const InnerChild = (props) => {
-  const {
-    user: { firstName, lastName, email, avatar },
-  } = props;
+  const { user: { firstName, lastName, email, avatar } = {} } = props;
 
   return (
-    <div
-      style={{
-        border: "2px solid black",
-        padding: "25px",
-        textAlign: "center",
+    <UserContext.Consumer>
+      {({ firstName, lastName, email, avatar }) => {
+        return (
+          <div
+            style={{
+              border: "2px solid black",
+              padding: "25px",
+              textAlign: "center",
+            }}
+          >
+            I'm InnerChild
+            <p>
+              {firstName} {lastName} {email}
+            </p>
+          </div>
+        );
       }}
-    >
-      I'm InnerChild
-      <p>{firstName} {lastName} {email}</p>
-    </div>
+    </UserContext.Consumer>
   );
 };
 

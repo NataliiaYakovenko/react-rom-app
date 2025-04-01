@@ -5,7 +5,7 @@ const Tree = (props) => {
   return (
     <div style={{border:"2px solid black", padding: '25px', textAlign:'center'}}>
       Tree
-      <Parent user={props.user}/>
+      <Parent />
     </div>
   );
 };

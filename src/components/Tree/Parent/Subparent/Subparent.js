@@ -5,7 +5,7 @@ const Subparent = (props) => {
   return (
     <div style={{ border: "2px solid black", padding: "25px", textAlign:'center' }}>
       Subparent
-      <Child user ={props.user} />
+      <Child  />
     </div>
   );
 }
