@@ -17,9 +17,19 @@ class App extends React.Component {
     };
   }
 
+  logOut = ()=>{
+    this.setState({
+      user:{}
+    })
+  }
+
   render() {
     console.log(UserContext);
-    return <UserContext.Provider value={this.state.user}>
+    return <UserContext.Provider value={{
+      user:this.state.user,
+      logOut: this.logOut
+    }}>
+
       <Tree/>
     </UserContext.Provider>;
   }
