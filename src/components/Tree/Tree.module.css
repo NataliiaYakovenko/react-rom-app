@@ -1,0 +1,16 @@
+.container {
+  border: 2px solid black;
+  padding: 25px;
+  text-align: center;
+}
+
+.lightTheme {
+  background-color: white;
+  color: black;
+}
+
+.darkTheme {
+  background-color: black;
+  border-color:  yellow;
+  color: white;
+}
