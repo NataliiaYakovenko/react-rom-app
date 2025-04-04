@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Tree from "./components/Tree/Tree";
 import { UserContext } from "./components/context/UserContext";
 import { ThemeContext } from "./components/context/ThemeContext";
 import CONSTANTS from "./constants";
+import TreeWithTheme from "./components/TreeWithTheme/TreeWithTheme";
 const {THEMES} = CONSTANTS
 
 
@@ -50,7 +50,7 @@ class App extends React.Component {
             logOut: this.logOut,
           }}
         >
-          <Tree />
+          <TreeWithTheme />
         </UserContext.Provider>
       </ThemeContext.Provider>
     );
