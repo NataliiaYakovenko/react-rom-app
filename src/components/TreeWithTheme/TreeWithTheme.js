@@ -6,6 +6,7 @@ import cx from "classnames";
 import { WithTheme } from "../../HOC/hoc";
 
 
+
 const { THEMES } = CONSTANTS;
 
 const Tree = (props) => {
@@ -22,15 +23,6 @@ const Tree = (props) => {
   );
 };
 
-// const TreeWithTheme = (props) => {
-//   return (
-//     <ThemeContext.Consumer>
-//       {({ theme, setTheme }) => {
-//         return <Tree theme={theme} setTheme={setTheme} />;
-//       }}
-//     </ThemeContext.Consumer>
-//   );
-// };
 
 
 
