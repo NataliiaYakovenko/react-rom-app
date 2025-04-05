@@ -80,3 +80,8 @@ class FormSignUp extends Component {
 }
 
 export default FormSignUp;
+
+/*
+Зробити компоненту входу
+Провести валідацію з використанням Yup
+*/

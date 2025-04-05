@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import FormSignUp from "./components/FormSignUp/FormSignUp";
+import FormSignIn from "./components/FormSignIn/FormSignIn";
+
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class App extends Component {
   }
 
   render() {
-    return <FormSignUp />;
+    return <FormSignIn />;
   }
 }
 
