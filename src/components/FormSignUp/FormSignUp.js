@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as yup from "yup";
+import SIGN_UP_SHEMA from "../../schemas";
 
 const initialState = {
   firstName: "",
@@ -8,22 +8,13 @@ const initialState = {
   password: "",
 };
 
-const SIGN_UP_SHEMA = yup.object({
-  firstName: yup.string().required().min(1).max(50),
-  lastName: yup.string().required().min(1).max(50),
-  email: yup.string().required().email(),
-  password: yup
-    .string()
-    .required()
-    .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/),
-});
-
 class FormSignUp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       ...initialState,
+      isError: null,
     };
   }
 
@@ -35,11 +26,21 @@ class FormSignUp extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    console.log(SIGN_UP_SHEMA.isValidSync(this.state));
+    try {
+      SIGN_UP_SHEMA.validateSync(this.state);
+
+      this.setState({
+        isError: null,
+      });
+    } catch (err) {
+      this.setState({
+        isError: err,
+      });
+    }
   };
 
   render() {
-    const { email, password, firstName, lastName } = this.state;
+    const { email, password, firstName, lastName, isError } = this.state;
     return (
       <form onSubmit={this.submitHandler}>
         <input
@@ -74,6 +75,10 @@ class FormSignUp extends Component {
           onChange={this.changeHandler}
         />
         <button>Login</button>
+
+        {isError && (
+          <p style={{ color: "red", fontSize: "20px" }}>{isError.message}</p>
+        )}
       </form>
     );
   }
