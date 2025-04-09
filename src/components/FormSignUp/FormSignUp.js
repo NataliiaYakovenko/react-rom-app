@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SIGN_UP_SHEMA from "../../schemas";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const initialState = {
   firstName: "",
@@ -16,14 +16,21 @@ function FormSignUp(props) {
   };
 
   return (
-    <Formik initialValues={initialState} onSubmit={handlerSubmitToFormik}>
+    <Formik initialValues={initialState} 
+    onSubmit={handlerSubmitToFormik}
+    validationSchema={SIGN_UP_SHEMA}
+    >
       {(formikProps) => {
         return (
-          <Form>
+          <Form style={{display:"flex", flexDirection: "column"}}>
             <Field type="text" name="firstName" placeholder='Your first name'/>
+            <ErrorMessage name="firstName" component='p'/>
             <Field type="text" name="lastName" placeholder='Your last name'/>
+            <ErrorMessage name="lastName" component='p'/>
             <Field type="text" name="email" placeholder='Your email'/>
+            <ErrorMessage name="email" component='p'/>
             <Field type="text" name="password" placeholder='Your password'/>
+            <ErrorMessage name="password" component='p'/>
 
             <button type="submit">Send</button>
           </Form>
