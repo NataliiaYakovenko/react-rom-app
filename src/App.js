@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import FormSignIn from "./components/FormSignIn/FormSignIn";
-import FormSignUp from "./components/FormSignUp/FormSignUp";
+import CounterHuk from "./components/CounterHuk/CounterHuk";
+import CounterHukFunctionComponent from "./components/CounterHuk/CounterHukFunctionComponent";
 
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   render() {
-    return <FormSignIn />;
+    return <CounterHukFunctionComponent />;
   }
 }
 
