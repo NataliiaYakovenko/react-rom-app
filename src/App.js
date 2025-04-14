@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import CounterHuk from "./components/CounterHuk/CounterHuk";
-import CounterHukFunctionComponent from "./components/CounterHuk/CounterHukFunctionComponent";
-
+import MouseTracker from "./components/MouseTracker/MouseTracker";
 
 class App extends Component {
   constructor(props) {
@@ -10,8 +8,10 @@ class App extends Component {
     this.state = {};
   }
 
+
+
   render() {
-    return <CounterHukFunctionComponent />;
+    return <MouseTracker />;
   }
 }
 
