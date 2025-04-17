@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import MouseTracker from "./components/MouseTracker/MouseTracker";
+import NewUserListHuk from "./components/UserList/NewUserListHuk";
+
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
 
 
   render() {
-    return <MouseTracker />;
+    return <NewUserListHuk />;
   }
 }
 
