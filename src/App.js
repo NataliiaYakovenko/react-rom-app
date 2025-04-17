@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import NewUserListHuk from "./components/UserList/NewUserListHuk";
+import SceneHuk from "./components/Scene/SceneHuk";
+
 
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
 
 
   render() {
-    return <NewUserListHuk />;
+    return <SceneHuk />;
   }
 }
 
