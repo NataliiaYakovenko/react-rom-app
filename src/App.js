@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Square from "./components/Square/Square";
+import InputUseRef from "./components/InputUseRef/InputUseRef";
 
 
 class App extends Component {
@@ -7,7 +7,7 @@ class App extends Component {
 
   render() {
     return (
-      <Square/>
+      <InputUseRef/>
     )
   }
 }
