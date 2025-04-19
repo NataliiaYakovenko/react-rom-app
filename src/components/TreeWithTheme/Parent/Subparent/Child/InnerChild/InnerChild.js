@@ -1,17 +1,22 @@
 import React from "react";
-import { WithUser } from "../../../../../../HOC/hoc";
+import { UserContext } from "../../../../../context/UserContext";
+import { useContext } from "react";
 
 const InnerChild = (props) => {
+  const {
+    logOut, user: { firstName, lastName, email },
+  } = useContext(UserContext);
+console.log(logOut);
 
   return (
-    <div  >
+    <div>
       I'm InnerChild
-      <button onClick={props.logOut}>Log out</button>
+      <button onClick={logOut}>Log out</button>
       <p>
-        {props.user.firstName} {props.user.lastName} {props.user.email}
+        {firstName} {lastName} {email}
       </p>
     </div>
   );
 };
 
-export default WithUser(InnerChild);
+export default InnerChild;

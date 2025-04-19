@@ -1,27 +1,24 @@
 import React from "react";
 import Child from "./Child/Child";
-import { WithTheme, WithUser } from "../../../../HOC/hoc";
+import { useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 import CONSTANTS from "../../../../constants";
+import { ThemeContext } from "../../../context/ThemeContext";
 const { THEMES } = CONSTANTS;
 
-const Subparent = (props) => {
-  const nextTheme = props.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+const Subparent = () => {
+  const { setTheme, theme } = useContext(ThemeContext);
+  const {user: { firstName }} = useContext(UserContext);
+
+  const nextTheme = theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
   return (
     <div>
       Subparent
-      <p>{props.user.firstName}</p>
-      <button onClick={() => props.setTheme(nextTheme)}>
-        Click to change theme
-      </button>
+      <p>{firstName}</p>
+      <button onClick={() => setTheme(nextTheme)}>Click to change theme</button>
       <Child />
     </div>
   );
 };
 
-
-
-const SubparentWithTheme = WithTheme(Subparent)
-
-const newUser = WithUser(SubparentWithTheme)
-
-export default newUser
+export default Subparent;
