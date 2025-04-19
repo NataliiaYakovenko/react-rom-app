@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import InputUseRef from "./components/InputUseRef/InputUseRef";
+import CounterVarios2 from "./components/Counter/CounterVarios2";
 
 
 class App extends Component {
@@ -7,7 +7,7 @@ class App extends Component {
 
   render() {
     return (
-      <InputUseRef/>
+      <CounterVarios2/>
     )
   }
 }
