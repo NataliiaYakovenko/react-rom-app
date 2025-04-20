@@ -3,20 +3,34 @@ import { useState, useEffect } from "react";
 
 function CounterVarios2() {
   const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(true)
 
-  useEffect(() => {                         // componentDidMount
-    const intervalId = setInterval(() => {
-      setCount((count) => {
-        return count + 1;
-      });
-    }, 1000);
 
-    return ()=>{                       // componentWillUnMount
-         clearInterval(intervalId)
-    }
-  }, []);
+  useEffect(() => {                        
+ if(isRunning === true){
+    const intervalId = setInterval(() => {     // componentDidMount
+        setCount((count) => {
+          return count + 1;
+        });
+      }, 1000);
+  
+      return ()=>{                       
+           clearInterval(intervalId)   // componentWillUnMount
+      }
+ }
+  }, [isRunning]);
 
-  return <h1>{count}</h1>;
+ const switchRunning = ()=>{
+    setIsRunning(!isRunning)
+ }
+
+
+  return <>
+  <h1>{count}</h1>
+  <button onClick={switchRunning}>{isRunning ? 'Stop' : "Start"}</button>
+
+
+  </>
 }
 
 export default CounterVarios2;
