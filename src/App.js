@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CounterVarios2 from "./components/Counter/CounterVarios2";
+import Clicker from "./components/SandboxComponent/Clicker";
 
 
 class App extends Component {
@@ -7,7 +7,7 @@ class App extends Component {
 
   render() {
     return (
-      <CounterVarios2/>
+      <Clicker/>
     )
   }
 }
