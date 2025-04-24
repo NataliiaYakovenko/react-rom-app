@@ -43,9 +43,9 @@ class PhonesLoader extends Component {
         {isError && <div>Error...{isError.message}</div>}
 
         <ul>
-          {phones.map((phone) => {
+          {phones.map((phone, index) => {
             return (
-              <li>
+              <li key={index}>
                 Brand: {phone.brand}--- Model: {phone.model}--- Price: {phone.price}
               </li>
             );

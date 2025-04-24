@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import Clicker from "./components/SandboxComponent/Clicker";
+import PhoneLoadersHuk from "./components/PhonesLoader/PhoneLoadersHuk";
 
 
 class App extends Component {
 
 
   render() {
-    return (
-      <Clicker/>
-    )
+    return  <PhoneLoadersHuk />
+    
   }
 }
 
