@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import PhoneLoadersHuk from "./components/PhonesLoader/PhoneLoadersHuk";
+import TVLoaderHuk from "./components/TVLoader/TVLoaderHuk";
 
 
 class App extends Component {
 
 
   render() {
-    return  <PhoneLoadersHuk />
+    return  <TVLoaderHuk />
     
   }
 }
