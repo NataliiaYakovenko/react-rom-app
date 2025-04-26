@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import TVLoaderHuk from "./components/TVLoader/TVLoaderHuk";
-
+import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 
 class App extends Component {
-
-
   render() {
-    return  <TVLoaderHuk />
-    
+    return (
+      <>
+        <RegistrationForm/>
+
+      </>
+    );
   }
 }
 
