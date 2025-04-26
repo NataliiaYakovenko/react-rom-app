@@ -9,6 +9,12 @@ function reducer(state, action) {
         count: state.count + 1,
       };
     }
+    case "CLICK_DECREMENT": {
+      return {
+        ...state,
+        count: state.count - 1,
+      };
+    }
 
     default: {
       return state;
@@ -22,19 +28,24 @@ const initialState = {
 
 function Clicker() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state)
 
-
-  const clickHandler=()=>{
+  const clickHandlerIncrement = () => {
     dispatch({
-        type: 'CLICK_INCREMENT'
-    })
-  }
+      type: "CLICK_INCREMENT",
+    });
+  };
+
+  const clickHandlerDecrement = () => {
+    dispatch({
+      type: "CLICK_DECREMENT",
+    });
+  };
 
   return (
     <>
       <h1>{state.count}</h1>
-      <button onClick={clickHandler}>+</button>
+      <button onClick={clickHandlerIncrement}>+</button>
+      <button onClick={clickHandlerDecrement}>-</button>
     </>
   );
 }
