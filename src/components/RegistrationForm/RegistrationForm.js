@@ -1,18 +1,10 @@
 import React from "react";
 import { useReducer } from "react";
+import registrationReducer from "../../reducers/registrationReducer";
+import CONSTANTS from "../../constants";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "INPUT_CHENGE": {
-      const {payload:{value,name}} = action
-      return {
-        ...state,
-        [name]: value
-      }
-    }
-    default: return state
-  }
-}
+const{ACTIONS}= CONSTANTS
+
 
 const initialState={
   firstName: '',
@@ -22,12 +14,12 @@ const initialState={
 }
 
 function RegistrationForm() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(registrationReducer, initialState);
   const {firstName,lastName,email,password} = state
    
   const universelChangeHandler =({target:{value,name}})=>{
    dispatch({
-    type:"INPUT_CHENGE",
+    type:ACTIONS.INPUT_CHENGE,
     payload: {
         value,
         name
@@ -35,12 +27,15 @@ function RegistrationForm() {
    })
   }
 
-
+  const submitHandler=(event)=>{
+   event.preventDefault()
+   console.log(state);
+  }
 
 
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <input
         type="text"
         name="firstName"
@@ -69,6 +64,8 @@ function RegistrationForm() {
         value={password}
         onChange={universelChangeHandler}
       />
+
+      <button type='submit' >Submit</button>
     </form>
   );
 }
