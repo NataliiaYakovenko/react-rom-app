@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Clicker from "./components/RegistrationForm/RegistrationForm";
+import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 
 class App extends Component {
   render() {
     return (
       <>
-        <Clicker />
+        <RegistrationForm />
       </>
     );
   }

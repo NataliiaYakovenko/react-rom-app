@@ -1,68 +1,76 @@
 import React from "react";
-import { useState, useReducer } from "react";
+import { useReducer } from "react";
 
-// function RegistrationForm() {
-//   const [firstName, setFirstName] = useState("");
-//   const [lastName, setLastName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
+function reducer(state, action) {
+  switch (action.type) {
+    case "INPUT_CHENGE": {
+      const {payload:{value,name}} = action
+      return {
+        ...state,
+        [name]: value
+      }
+    }
+    default: return state
+  }
+}
 
-//   const changeHandler = ({ target: { value, name } }) => {
-//     switch (name) {
-//       case "firstName": {
-//         setFirstName(value);
-//         break;
-//       }
-//       case "lastName": {
-//         setLastName(value);
-//         break;
-//       }
-//       case "email": {
-//         setEmail(value);
-//         break;
-//       }
-//       case "password": {
-//         setPassword(value);
-//         break;
-//       }
-//       default: {
-//         break;
-//       }
-//     }
-//   };
+const initialState={
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: ''
+}
 
-//   return (
-//     <form>
-//       <input
-//         type="text"
-//         name="firstName"
-//         placeholder="Type your first name"
-//         value={firstName}
-//         onChange={changeHandler}
-//       />
-//       <input
-//         type="text"
-//         name="lastName"
-//         placeholder="Type your last name"
-//         value={lastName}
-//         onChange={changeHandler}
-//       />
-//       <input
-//         type="email"
-//         name="email"
-//         placeholder="your@mail"
-//         value={email}
-//         onChange={changeHandler}
-//       />
-//       <input
-//         type="password"
-//         name="password"
-//         placeholder="Your password"
-//         value={password}
-//         onChange={changeHandler}
-//       />
-//     </form>
-//   );
-// }
+function RegistrationForm() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {firstName,lastName,email,password} = state
+   
+  const universelChangeHandler =({target:{value,name}})=>{
+   dispatch({
+    type:"INPUT_CHENGE",
+    payload: {
+        value,
+        name
+    }
+   })
+  }
 
-// export default RegistrationForm;
+
+
+
+
+  return (
+    <form>
+      <input
+        type="text"
+        name="firstName"
+        placeholder="Type your first name"
+        value={firstName}
+        onChange={universelChangeHandler}
+      />
+      <input
+        type="text"
+        name="lastName"
+        placeholder="Type your last name"
+        value={lastName}
+        onChange={universelChangeHandler}
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="your@mail"
+        value={email}
+        onChange={universelChangeHandler}
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Your password"
+        value={password}
+        onChange={universelChangeHandler}
+      />
+    </form>
+  );
+}
+
+export default RegistrationForm;
