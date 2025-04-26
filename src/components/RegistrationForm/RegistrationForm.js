@@ -7,51 +7,59 @@ function RegistrationForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const firstNameChangeHandler = ({ target: { value } }) => {
-    setFirstName(value);
+  const changeHandler = ({ target: { value, name } }) => {
+    switch (name) {
+      case "firstName": {
+        setFirstName(value);
+        break;
+      }
+      case "lastName": {
+        setLastName(value);
+        break;
+      }
+      case "email": {
+        setEmail(value);
+        break;
+      }
+      case "password": {
+        setPassword(value);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   };
-
-  const lastNameChangeHandler = ({ target: { value } }) => {
-    setLastName(value);
-  };
-
-  const emailChangeHandler = ({ target: { value } }) => {
-    setEmail(value);
-  };
-
-  const passwordChangeHandler=({target:{value}})=>{
-    setPassword(value)
-  }
 
   return (
     <form>
       <input
         type="text"
         name="firstName"
-        placeholder="Type your fierst name"
+        placeholder="Type your first name"
         value={firstName}
-        onChange={firstNameChangeHandler}
+        onChange={changeHandler}
       />
       <input
         type="text"
         name="lastName"
         placeholder="Type your last name"
         value={lastName}
-        onChange={lastNameChangeHandler}
+        onChange={changeHandler}
       />
       <input
         type="email"
         name="email"
         placeholder="your@mail"
         value={email}
-        onChange={emailChangeHandler}
+        onChange={changeHandler}
       />
       <input
         type="password"
-        name="passworde"
+        name="password"
         placeholder="Your password"
         value={password}
-        onChange={passwordChangeHandler}
+        onChange={changeHandler}
       />
     </form>
   );
